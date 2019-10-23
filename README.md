@@ -1,0 +1,1 @@
+This is project is for a simple todo flask app with a postgres backend. 
