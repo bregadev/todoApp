@@ -1,13 +1,19 @@
 <html>
   <head>
     <title>Todo App</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
   </head>
   <body>
     <form id="form">
       <input type="text" id="description" name="description" />
       <input type="submit" value="Create" />
     </form>
-    <ul>
+    <div id="error" class="hidden">Something Went Wrong!</div>
+    <ul id="todos">
       {% for d in data %}
       <li>{{ d.description }}</li>
       {% endfor %}
@@ -25,7 +31,17 @@
                 }
             })
             .then(function(response){
-                return
+                return  response.json();
+            })
+            .then(function(jsonResponse){
+                console.log(jsonResponse);
+                const liItem = document.createElement('LI');
+                liItem.innerHTML = jsonResponse['description'];
+                document.getElementById('todos').appendChild(liItem);
+                document.getElementById('error').className = 'hidden';
+            })
+            .catch(function(){
+                document.getElementById('error').className = '';
             })
 
        }
