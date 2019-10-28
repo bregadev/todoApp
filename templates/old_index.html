@@ -76,38 +76,23 @@
             .then(function(jsonResponse){
                 console.log(jsonResponse);
                 const liItem = document.createElement('LI');
-                liItem.innerHTML = jsonResponse['description']; 
+                liItem.innerHTML = jsonResponse['description'];
                 document.getElementById('todos').appendChild(liItem);
                 
             })
             .catch(function(){
                 document.getElementById('error').className = '';
             })
-            location.reload();
+
        }
        const deleteBtns = document.querySelectorAll('.delete-button');
        for (let i = 0; i < deleteBtns.length; i++) {
         const btn = deleteBtns[i];
         btn.onclick = function(e) {
-          btn.parentElement.className = 'hidden'
           const todoId = e.target.dataset['id'];
           fetch('/todos/' + todoId, {
-            method: 'DELETE',
-            headers: {
-                    'Content-Type': 'application/json'
-            }
-          })
-          .then(function(response){
-                return  response.json();
-          })
-          .then(function(jsonResponse){
-                console.log(jsonResponse);
-                
-                
-            })
-            .catch(function(){
-                document.getElementById('error').className = '';
-            })
+            method: 'DELETE'
+          });
         }
       }
     </script>
